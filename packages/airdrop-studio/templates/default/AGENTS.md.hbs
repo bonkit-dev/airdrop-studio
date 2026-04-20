@@ -1,0 +1,59 @@
+# AI Agent Development Guide
+
+Solana token airdrop campaign page. Static React SPA — visitors connect a wallet, check eligibility, claim tokens.
+
+## Constraints
+
+**MUST:** static-hostable (no SSR/server deps), preserve wallet connect + eligibility + claim flow, use `--campaign-*` CSS vars for theming, keep ErrorBoundary in App.tsx, validate with `pnpm build`.
+
+**MUST NOT:** touch `.bonkit/` (recipient data), add server dependencies, use `dangerouslySetInnerHTML`, expose private keys, bypass wallet connection.
+
+## Editing Priority
+
+1. `src/layout-config.ts` — labels, visibility, options (typed as `LayoutConfig`)
+2. `src/theme.ts` — colors, fonts, radius (typed as `ThemeTokens`)
+3. `.env` — `VITE_RPC_URL`, `VITE_SITE_URL`
+4. `src/App.tsx` — layout switch, providers (keep ErrorBoundary)
+5. `src/layouts/` — layout components (maintain `config, colors, slots` prop interface)
+6. `public/` — image assets
+7. `src/components/ui/` — UI primitives (last resort)
+
+**Avoid** `campaign.config.json` — Zod-schema validated, invalid edits break app + studio.
+
+## File Map
+
+```
+src/main.tsx                    # React DOM entry
+src/App.tsx                     # Error boundary + wallet provider + theme vars + layout
+src/styles.css                  # Tailwind entry (imports styles/campaign.css)
+src/theme.ts                    # Theme tokens
+src/layout-config.ts            # Layout config (labels, images, addresses, options)
+src/types.ts                    # LayoutConfig + ThemeTokens types
+src/layouts/                    # centered, two-column, hero-banner, step-card
+src/layouts/slots.tsx           # SlotProps type (changes break all layouts)
+src/layouts/wallet-slots.tsx    # Wallet-aware slots (connect, claim, eligibility)
+src/layouts/shared/             # HeroBackground, FooterBlock, CountdownBlock, StatusBadge, TokenIdentity
+src/components/wallet/          # Solana wallet adapter
+src/components/ui/              # shadcn-style primitives
+src/hooks/use-airdrop.ts        # Airdrop state machine
+src/lib/airdrop-client.ts       # Airdrop SDK wrapper
+```
+
+## Layout Switch
+
+```tsx
+// In App.tsx, change import:
+import { TwoColumnLayout } from "./layouts/two-column"
+// Available: CenteredLayout, TwoColumnLayout, HeroBannerLayout, StepCardLayout
+```
+
+## OG Image (not included by default)
+
+1. `public/og-image.png` (1200x630)
+2. Add to `index.html`: `<meta property="og:image" content="%VITE_SITE_URL%/og-image.png" />`
+3. Change `twitter:card` to `"summary_large_image"`
+4. Set `VITE_SITE_URL` in `.env`
+
+## Stack
+
+TailwindCSS v4, Radix UI, class-variance-authority, lucide-react, Solana wallet adapter, @tanstack/react-query

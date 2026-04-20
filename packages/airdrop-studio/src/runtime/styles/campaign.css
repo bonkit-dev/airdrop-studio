@@ -1,0 +1,94 @@
+.campaign-shell {
+  background:
+    radial-gradient(
+      circle at top,
+      color-mix(in oklab, var(--campaign-primary) 20%, transparent),
+      transparent 32%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--campaign-background) 88%, black),
+      var(--campaign-background)
+    );
+}
+
+.campaign-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--campaign-foreground) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--campaign-foreground) 6%, transparent) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.campaign-panel {
+  background-color: var(--campaign-card);
+  color: var(--campaign-card-foreground);
+  border-color: var(--campaign-border);
+}
+
+.campaign-muted {
+  color: var(--campaign-muted-foreground);
+}
+
+.campaign-value {
+  background-color: var(--campaign-input);
+  border-color: var(--campaign-border);
+}
+
+.campaign-input {
+  background-color: var(--campaign-input);
+  border-color: var(--campaign-border);
+}
+
+.campaign-ring {
+  --tw-ring-color: var(--campaign-ring);
+}
+
+/* ── Shimmer animations ── */
+
+@keyframes campaign-border-shimmer {
+  0% { background-position: 100% 0 }
+  100% { background-position: 0% 0 }
+}
+
+@keyframes campaign-glow-pulse {
+  0%, 100% { box-shadow: 0 0 6px 1px var(--campaign-glow-lo) }
+  50% { box-shadow: 0 0 20px 5px var(--campaign-glow-hi) }
+}
+
+/* Border shimmer — for outline-style buttons */
+.campaign-shimmer {
+  position: relative;
+  overflow: hidden;
+  border-color: transparent !important;
+  --campaign-shimmer-base: var(--campaign-border);
+}
+.campaign-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(
+    90deg,
+    var(--campaign-shimmer-base) 0%,
+    var(--campaign-shimmer-base) 35%,
+    var(--campaign-primary) 48%,
+    var(--campaign-primary) 52%,
+    var(--campaign-shimmer-base) 65%,
+    var(--campaign-shimmer-base) 100%
+  );
+  background-size: 300% 100%;
+  animation: campaign-border-shimmer 3.5s linear infinite;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Outer glow — for filled primary CTA buttons */
+.campaign-shimmer-glow {
+  --campaign-glow-lo: color-mix(in srgb, var(--campaign-primary) 35%, transparent);
+  --campaign-glow-hi: color-mix(in srgb, var(--campaign-primary) 50%, transparent);
+  animation: campaign-glow-pulse 2.5s ease-in-out infinite;
+}

@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./styles/campaign.css";
+@source "./**/*.{ts,tsx}";
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  min-height: 100dvh;
+}

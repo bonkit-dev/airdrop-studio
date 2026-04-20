@@ -1,0 +1,36 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./styles/campaign.css";
+@source "./**/*.{ts,tsx}";
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+html,
+body {
+  background-color: var(--campaign-background);
+  font-family: var(--campaign-font-body, "Helvetica Neue", Arial, sans-serif);
+}
+
+body {
+  min-height: 100dvh;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--campaign-font-heading, var(--campaign-font-body, "Helvetica Neue", Arial, sans-serif));
+}

@@ -1,0 +1,100 @@
+export type LayoutPresetId = "hero-banner" | "two-column" | "centered" | "step-card"
+export type ClaimMode = "onchain" | "merkle"
+export type SolanaCluster = "mainnet-beta" | "devnet"
+
+export type CampaignConfig = {
+  brand: {
+    name: string
+    tagline?: string
+    logoUrl?: string
+    showBrandNameWithLogo?: boolean
+    colors: {
+      primary: string
+      secondary?: string
+      accent?: string
+      background?: string
+      foreground?: string
+    }
+  }
+  network: {
+    cluster: SolanaCluster
+    rpcUrl: string
+  }
+  campaign: {
+    type: "airdrop"
+    claimMode: ClaimMode
+    airdropAddress: string
+    mintAddress: string
+    startDate?: string
+    endDate?: string
+  }
+  ui?: {
+    layout?: {
+      preset?: LayoutPresetId
+    }
+    colors?: {
+      primaryForeground?: string
+      card?: string
+      cardForeground?: string
+      muted?: string
+      mutedForeground?: string
+      border?: string
+      input?: string
+      ring?: string
+      surface?: string
+    }
+    radius?: string
+    heroImageUrl?: string
+    symbolUrl?: string
+    heroGradientPrimary?: string
+    heroGradientAccent?: string
+    announcementBarColorOverride?: string
+  }
+  content?: {
+    heroTitle?: string
+    heroBody?: string
+    claimButtonLabel?: string
+    eligibilityButtonLabel?: string
+    connectWalletLabel?: string
+    announcementText?: string
+    countdownStartEyebrow?: string
+    countdownEndEyebrow?: string
+    countdownEndedLabel?: string
+    countdownHoursLabel?: string
+    countdownMinutesLabel?: string
+    countdownSecondsLabel?: string
+    statTotalClaimsLabel?: string
+    statAllocatedLabel?: string
+    statClaimedLabel?: string
+  }
+  links?: {
+    custom?: Array<{
+      label: string
+      href: string
+      category?: "telegram" | "x" | "discord" | "medium" | "custom"
+      iconOnly?: boolean
+    }>
+  }
+}
+
+export type ThemeTokens = {
+  primary: string
+  primaryForeground: string
+  secondary: string
+  background: string
+  foreground: string
+  card: string
+  cardForeground: string
+  muted: string
+  mutedForeground: string
+  border: string
+  input: string
+  inputHover: string
+  ring: string
+  radius: string
+  radiusSm: string
+  radiusMd: string
+  radiusLg: string
+  radiusXl: string
+  colorScheme: "light" | "dark"
+}

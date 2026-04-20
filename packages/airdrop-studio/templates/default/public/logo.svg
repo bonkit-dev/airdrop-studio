@@ -1,0 +1,5 @@
+<svg width="160" height="48" viewBox="0 0 160 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="2" y="2" width="44" height="44" rx="14" fill="#78F5B8"/>
+  <path d="M18 15H30C35.5228 15 40 19.4772 40 25C40 30.5228 35.5228 35 30 35H18V15Z" fill="#081018"/>
+  <text x="58" y="30" fill="#F5F7FF" font-family="Arial, sans-serif" font-size="18" font-weight="700">{{brandName}}</text>
+</svg>
